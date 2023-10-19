@@ -42,7 +42,7 @@ jobs:
           else
             env="staging"
           fi
-          echo "env=$env"
+          echo "env=$env" >> "$GITHUB_OUTPUT"
 
 
   # This workflow contains a single job called "build"
