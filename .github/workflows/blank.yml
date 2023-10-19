@@ -42,7 +42,7 @@ jobs:
           else
             env="staging"
           fi
-          echo "env=[ $env ]" >> $GITHUB_OUTPUT
+          echo "env=[ \"$env\" ]" >> $GITHUB_OUTPUT
       - name: Run a one-line script
         run: echo ${{ steps.random-env.outputs.env }}
       - name: Run a one-line script
