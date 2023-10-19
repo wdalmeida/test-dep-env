@@ -24,12 +24,36 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  hello:
-    environment: ${{ inputs.environment }}
+   # This workflow contains a single job called "build"
+  init:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    outputs:
+      env: ${{ steps.random-env.outputs.env }}
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        id: random-env
+        run: |
+          random_number=$((RANDOM % 2))
+          if [ "$random_number" -eq 0 ]; then
+            env="dev"
+          else
+            env="staging"
+          fi
+          echo "env=$env"
 
+
+  # This workflow contains a single job called "build"
+  hello:
+    needs: [init]
+    environment: ${{ matrix.environment }}
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: ${{ input.env }}
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -41,4 +65,4 @@ jobs:
           echo Hello, ${{ secrets.HELLO }}
           x=${{ secrets.HELLO }}
           echo Hello, ${{ vars.WORLD }}
-          echo "x=$x"
+          echo "x=$(echo $x)"
