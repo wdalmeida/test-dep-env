@@ -16,7 +16,7 @@ on:
       environment:
         description: "Environment to target"
         required: true
-        default: "dev"
+        default: dev
         type: choice
         options:
           - dev
@@ -38,9 +38,9 @@ jobs:
         run: |
           random_number=$((RANDOM % 2))
           if [ "$random_number" -eq 0 ]; then
-            env="dev"
+            env=dev
           else
-            env="staging"
+            env=staging
           fi
           echo "env=[ $env ]" >> "$GITHUB_OUTPUT"
 
