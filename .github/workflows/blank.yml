@@ -38,13 +38,15 @@ jobs:
         run: |
           random_number=$((RANDOM % 2))
           if [ "$random_number" -eq 0 ]; then
-            env=dev
+            env="dev"
           else
-            env=staging
+            env="staging"
           fi
           echo "env=[ $env ]" >> $GITHUB_OUTPUT
       - name: Run a one-line script
         run: echo ${{ steps.random-env.outputs.env }}
+      - name: Run a one-line script
+        run: echo ${{ fromJson(steps.random-env.outputs.env) }}
 
 
   # This workflow contains a single job called "build"
@@ -55,7 +57,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        environment: ${{ needs.init.outputs.env }}
+        environment: ${{fromJson(needs.init.outputs.env)}}
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Runs a single command using the runners shell
