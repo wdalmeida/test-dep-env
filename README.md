@@ -4,6 +4,45 @@
 ~ Yellow
 ~ Orange
 <= Blue
+
+ # local_file.foo will be created
+  + resource "local_file" "foo" {
+      + content              = "phoenix"
+      + content_base64sha256 = (known after apply)
+      + content_base64sha512 = (known after apply)
+      + content_md5          = (known after apply)
+      + content_sha1         = (known after apply)
+      + content_sha256       = (known after apply)
+      + content_sha512       = (known after apply)
+      + directory_permission = "0777"
+      + file_permission      = "0777"
+      + filename             = "./mytest.yaml"
+      + id                   = (known after apply)
+    }
+
+-/+ destroy and then create replacement
+
+Terraform will perform the following actions:
+
+  # local_file.foo must be replaced
+-/+ resource "local_file" "foo" {
+      ~ content              = "phoenix" # forces replacement -> (known after apply) # forces replacement
+      ~ content_base64sha256 = "A6jw3Y7bM3gag2rEl4ALX5xcR8Ldv9D4lYEUBYlyWoU=" -> (known after apply)
+      ~ content_base64sha512 = "FOHqIx/MaY60P0nb/tYzhSDFmGX/u30Q1IRWOWQDgtyLuHgot4EVgcUF/CP4SoHA47+UnXCftQdwTws9Fh3KbQ==" -> (known after apply)
+      ~ content_md5          = "b3d97746dbb45e92dc083db205e1fd14" -> (known after apply)
+      ~ content_sha1         = "41880ee3438c878762e9a1a0fec66bcc23dac767" -> (known after apply)
+      ~ content_sha256       = "03a8f0dd8edb33781a836ac497800b5f9c5c47c2ddbfd0f89581140589725a85" -> (known after apply)
+      ~ content_sha512       = "14e1ea231fcc698eb43f49dbfed6338520c59865ffbb7d10d4845639640382dc8bb87828b7811581c505fc23f84a81c0e3bf949d709fb507704f0b3d161dca6d" -> (known after apply)
+      ~ id                   = "41880ee3438c878762e9a1a0fec66bcc23dac767" -> (known after apply)
+        # (3 unchanged attributes hidden)
+    }
+
+  # random_pet.server must be replaced
+-/+ resource "random_pet" "server" {
+      ~ id        = "phoenix" -> (known after apply)
+      ~ length    = 1 -> 2 # forces replacement
+        # (2 unchanged attributes hidden)
+    }
 ```
 
 <html>
