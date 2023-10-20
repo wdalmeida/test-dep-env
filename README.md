@@ -6,7 +6,7 @@
 <= Blue
 ```
 
-
+<html>
 <body style="color:white; background-color:black">
 <pre>
 <span style="font-weight:bold;">random_pet.server: Refreshing state... [id=phoenix]</span>
@@ -46,3 +46,4 @@ Note: You didn't use the -out option to save this plan, so Terraform can't
 guarantee to take exactly these actions if you run &quot;terraform apply&quot; now.
 </pre>
 </body>
+</html>
